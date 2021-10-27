@@ -87,9 +87,8 @@ class Command extends EventEmitter {
       ...userDevServer
     };
 
-    this.portIsOccupied(config.port, (err, checkPort) => {
+    this.portIsOccupied(config.port, (err, port) => {
       if (err !== null) return;
-      const port = checkPort;
       compiler.hooks &&
         compiler.hooks.done.tapAsync({ name: 'CompiledRenderProcessOnce' }, (compilation, callback) => {
           if (!this.AutoOpenApp._RenderProcessDone) this.AutoOpenApp._RenderProcessDone = true;
