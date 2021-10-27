@@ -21,8 +21,8 @@ module.exports = {
   /** speed-measure-webpack-plugin */
   smp: false,
 
-  /** 主进程端口，开发环境渲染进程端口号 +=1 */
-  port: 8089,
+  /** 开发环境端口号 占用自动+1 */
+  port: 8080,
 
   entry: {
     renderProcess: 'src/index.tsx'
@@ -39,7 +39,7 @@ module.exports = {
     compress: true,
     inline: true,
     hot: true,
-    port: 8080,
+    port: 9999,
     historyApiFallback: true,
     proxy: {
       '/api': {

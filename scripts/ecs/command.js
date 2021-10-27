@@ -7,6 +7,7 @@ const childProcess = require('child_process');
 const WebpackDevServer = require('webpack-dev-server');
 const RenderProcessWebpackConfig = require('./webpack/webpack.config.js');
 const os = require('os');
+const net = require('net');
 require('colors');
 
 class Command extends EventEmitter {
@@ -40,6 +41,23 @@ class Command extends EventEmitter {
     }
     return address;
   }
+
+  /** 检测端口占用 */
+  portIsOccupied(port, callback = (err, port) => {}) {
+    const server = net.createServer().listen(port);
+    server.on('listening', () => {
+      server.close();
+      callback(null, port);
+    });
+    server.on('error', (err) => {
+      if (err.code === 'EADDRINUSE') {
+        this.portIsOccupied(port + 1, callback);
+      } else {
+        callback(err);
+      }
+    });
+  }
+
   /** Readme */
   childProcessExec(runPath) {
     const _childProcess = childProcess.exec(runPath);
@@ -64,21 +82,26 @@ class Command extends EventEmitter {
       overlay: { errors: true, warnings: true },
       ...userDevServer
     };
-    compiler.hooks &&
-      compiler.hooks.done.tapAsync({ name: 'CompiledRenderProcessOnce' }, (compilation, callback) => {
-        if (!this.AutoOpenApp._RenderProcessDone) this.AutoOpenApp._RenderProcessDone = true;
-        callback();
 
-        const localTitle = `- Local:   `.green;
-        const localInner = `http://localhost:${config.port}/`.blue;
-        const networkTitle = `- Network: `.green;
-        const networkInner = `http://${this.GetIPAddress('IPv4')}:${config.port}/`.blue;
-        console.info(``);
-        console.info(`serve running at:`.rainbow);
-        console.info(localTitle + localInner);
-        console.info(networkTitle + networkInner);
-      });
-    new WebpackDevServer(compiler, devServerOptions).listen(config.port);
+    this.portIsOccupied(config.port, (err, checkPort) => {
+      if (err !== null) return;
+      const port = checkPort;
+      compiler.hooks &&
+        compiler.hooks.done.tapAsync({ name: 'CompiledRenderProcessOnce' }, (compilation, callback) => {
+          if (!this.AutoOpenApp._RenderProcessDone) this.AutoOpenApp._RenderProcessDone = true;
+          callback();
+
+          const localTitle = `- Local:   `.green;
+          const localInner = `http://localhost:${port}/`.blue;
+          const networkTitle = `- Network: `.green;
+          const networkInner = `http://${this.GetIPAddress('IPv4')}:${port}/`.blue;
+          console.info(``);
+          console.info(`serve running at:`.rainbow);
+          console.info(localTitle + localInner);
+          console.info(networkTitle + networkInner);
+        });
+      new WebpackDevServer(compiler, devServerOptions).listen(port);
+    });
   }
 
   /** Readme */
