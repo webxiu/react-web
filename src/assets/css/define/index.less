@@ -1,0 +1,397 @@
+/** reset 默认使用 antd 默认样式 */
+@import './variable.less';
+@import './mixins.less';
+@import './cssBEM.less';
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  background: 0 0;
+  color: #666;
+}
+
+a:link,
+a:visited,
+a:active {
+  color: #666;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #666;
+  opacity: 0.89;
+}
+
+a img {
+  border: 0;
+  vertical-align: top;
+}
+
+html body {
+  color: #fafafb;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+  padding: 0;
+}
+
+/* ::-webkit-scrollbar — 整个滚动条.
+::-webkit-scrollbar-button — 滚动条上的按钮 (上下箭头).
+::-webkit-scrollbar-thumb — 滚动条上的滚动滑块.
+::-webkit-scrollbar-track — 滚动条轨道.
+::-webkit-scrollbar-track-piece — 滚动条没有滑块的轨道部分.
+::-webkit-scrollbar-corner — 当同时有垂直滚动条和水平滚动条时交汇的部分.
+::-webkit-resizer — 某些元素的corner部分的部分样式(例:textarea的可拖动按钮).
+::-webkit-scrollbar-corner —  滚动条左下角交叉方块
+ */
+
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 8px;
+  background-color: var(--bodybgc);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  background-color: var(--scrollbar);
+  /* --headbgc*/
+}
+
+::-webkit-scrollbar-corner {
+  /*
+  background-image: url(resources/corner.png);
+  background-repeat: no-repeat;
+  */
+  background-color: var(--bodybgc);
+}
+
+.ant-tree-list-scrollbar {
+  background: var(--bodybgc);
+  width: 4px !important;
+}
+
+.ant-tree-list-scrollbar-thumb {
+  width: 4px !important;
+  background: var(--scrollbar) !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+  -webkit-text-fill-color: #ffff;
+}
+
+input:-internal-autofill-previewed,
+input:-internal-autofill-selected {
+  -webkit-text-fill-color: #fff;
+  transition: background-color 5000s ease-out 0.5s;
+}
+
+body {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #fff;
+  }
+
+  /* 下拉菜单 */
+  .ant-dropdown-placement-bottomCenter>.ant-dropdown-arrow,
+  .ant-dropdown-placement-bottomLeft>.ant-dropdown-arrow,
+  .ant-dropdown-placement-bottomRight>.ant-dropdown-arrow {
+    border-top-color: var(--tipsbgc);
+    border-left-color: var(--tipsbgc);
+  }
+
+  .ant-dropdown-menu {
+    background-color: var(--tipsbgc);
+  }
+
+  .ant-dropdown-menu-item,
+  .ant-dropdown-menu-item>a,
+  .ant-dropdown-menu-submenu-title>a,
+  .ant-dropdown-menu-item>span {
+    color: #fff;
+  }
+
+  .ant-dropdown-menu-item:hover,
+  .ant-dropdown-menu-submenu-title:hover {
+    background-color: #212121;
+  }
+
+  label.ant-form-item-required,
+  .ant-form-item-label label {
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #fafafb;
+    letter-spacing: 0.8px;
+  }
+
+  .ant-form-item {
+    margin-bottom: 10px;
+  }
+
+  /** 下拉框 */
+  .ant-input,
+  .ant-picker,
+  .ant-cascader-picker,
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector,
+  .ant-select .ant-select-selector {
+    background: var(--formInputbgc);
+    background-color: var(--formInputbgc);
+    color: var(--formInputc);
+    border: none;
+    border-radius: 10px;
+    min-height: 38px;
+  }
+
+  .ant-form-item-has-error .ant-input,
+  .ant-form-item-has-error .ant-input-affix-wrapper,
+  .ant-form-item-has-error .ant-input:hover,
+  .ant-form-item-has-error .ant-input-affix-wrapper:hover {
+    background-color: var(--formInputbgc);
+  }
+
+
+
+  /** 下拉箭头 */
+  .ant-select-arrow,
+  .ant-cascader-picker-clear {
+    color: var(--formInputc);
+  }
+
+  /** 清空图标 */
+  .ant-input-affix-wrapper {
+    background: var(--formInputbgc);
+    border: none;
+    padding-top: 0;
+    border-radius: 10px;
+    padding-bottom: 0;
+  }
+
+  /** 清空图标 */
+  .ant-input-clear-icon {
+    color: var(--formInputc);
+  }
+
+  /** 树下拉框 */
+  .ant-select-tree-switcher,
+  .ant-select-tree-title {
+    color: #fff;
+  }
+
+  /* .ant-select-tree-treenode:hover,  */
+  .ant-select-tree-treenode .ant-select-tree-node-content-wrapper:hover {
+    background-color: #6b6b6b;
+  }
+
+  /** 级联组件 */
+  .ant-cascader-menu {
+    background-color: var(--formInputbgc);
+    border-color: #3a3a3a;
+  }
+
+  .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled),
+  .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
+    background-color: #353434;
+  }
+
+  .ant-cascader-picker-clear,
+  .ant-cascader-menu-item:hover {
+    background: var(--formInputbgc);
+  }
+
+  .ant-cascader-picker-clear:hover,
+  .ant-cascader-picker-arrow,
+  .ant-cascader-menu-item-expand .ant-cascader-menu-item-expand-icon,
+  .ant-cascader-menu-item-loading-icon {
+    color: #fff;
+  }
+
+  .ant-picker-input>input {
+    color: var(--formInputc) !important;
+  }
+
+  /* 清除图标 */
+  .ant-form-item .ant-picker-clear,
+  .ant-input-clear-icon:hover {
+    background: var(--formInputbgc);
+    color: var(--formInputc);
+    border: none;
+  }
+
+  .ant-form-item .ant-picker-suffix {
+    color: var(--formInputc);
+  }
+
+  .submit-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .reset {
+    margin-right: 20px;
+  }
+
+  .ant-picker-panel-container {
+    background: #13131a;
+  }
+
+  .ant-picker-header,
+  .ant-picker-content th,
+  .ant-picker-content td {
+    color: #fff;
+  }
+
+  .anticon.anticon-swap-right {
+    color: var(--formInputc);
+  }
+
+  .ant-picker-cell-in-view.ant-picker-cell-in-range::before {
+    background: #2c3c44;
+  }
+
+  .ant-picker-cell-disabled::before {
+    background: #6d6d6d;
+  }
+
+  .ant-picker-cell-disabled .ant-picker-cell-inner {
+    color: #969696;
+  }
+
+  .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover::before {
+    background: #2c3c44;
+  }
+
+  .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single)::before,
+  .ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single)::before {
+    background: #2c3c44;
+  }
+
+  .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single).ant-picker-cell-range-hover-start::before,
+  .ant-picker-cell-in-view.ant-picker-cell-range-selected.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single)::before {
+    background: #00f;
+  }
+
+  .ant-picker-header button {
+    color: #fff;
+  }
+
+  .ant-picker-header button:hover {
+    color: #1890ff;
+  }
+
+  .ant-picker-range-arrow::after {
+    border-color: #000 #000 transparent transparent;
+  }
+
+  .ant-select:hover .ant-select-selector,
+  .ant-select.ant-select-focused .ant-select-selector {
+    border-color: #4f4f5a !important;
+  }
+
+  .ant-select .ant-select-arrow {
+    color: #b5b5be;
+  }
+
+  .ant-select-single .ant-select-selector .ant-select-selection-item,
+  .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+    line-height: 38px !important;
+  }
+
+  .ant-select .ant-select-clear {
+    background: transparent;
+    color: #000;
+  }
+
+  .ant-select:hover .ant-select-clear {
+    background: var(--formInputbgc);
+    color: var(--formInputc);
+  }
+
+  .ant-select-dropdown {
+    background: var(--formInputbgc);
+  }
+
+  .ant-select-dropdown .ant-select-item-option {
+    color: #b5b5be;
+  }
+
+  .ant-select-dropdown .ant-select-item-option:hover {
+    background: #1c1c24;
+    color: #b5b5be;
+  }
+
+  .ant-select-dropdown .ant-select-item-option-selected {
+    background-color: #1c1c24;
+  }
+
+  .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    background-color: transparent;
+  }
+
+  /*多选下拉框*/
+  .ant-select-multiple .ant-select-selection-item {
+    background: #212121;
+    border: 1px solid #212121;
+  }
+
+  .ant-select-multiple .ant-select-selection-item-remove {
+    color: #ccc;
+  }
+
+  .ant-select-multiple .ant-select-selection-item-remove:hover {
+    color: #fff;
+  }
+
+  .ant-form-item-has-error .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input) .ant-select-selector {
+    background-color: var(--formInputbgc);
+  }
+
+  /* 卡片背景色 */
+  .ant-card {
+    background: transparent;
+  }
+
+  .ant-card-head,
+  .ant-card-body {
+    color: #fff;
+    padding: 0;
+  }
+
+  /* 步骤条 */
+  .ant-steps .ant-steps-item-title {
+    color: #fff !important;
+  }
+
+  .ant-steps .ant-steps-item-description {
+    color: #909090 !important;
+  }
+
+  /* 描述列表 */
+  .ant-descriptions-item-label,
+  .ant-descriptions-item-content {
+    color: #fff !important;
+  }
+
+  /* 选择框 单选框 */
+  .ant-checkbox-wrapper,
+  .ant-radio-wrapper {
+    color: #fff;
+  }
+
+}
