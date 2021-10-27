@@ -42,8 +42,12 @@ class Command extends EventEmitter {
     return address;
   }
 
-  /** 检测端口占用 */
-  portIsOccupied(port, callback = (err, port) => {}) {
+  /**
+   * 检测端口占用
+   * @param port 端口号
+   * @param callback 检测完成回调
+   */
+  portIsOccupied(port, callback) {
     const server = net.createServer().listen(port);
     server.on('listening', () => {
       server.close();
