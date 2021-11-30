@@ -15,8 +15,8 @@ console.log(`$$`, $$);
 const Login: React.FC = () => {
   const { Global } = useInject('Setting', 'Global');
   const { push } = useHistory();
-  const [account, setAccount] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
+  const [account, setAccount] = React.useState<string>('10001');
+  const [password, setPassword] = React.useState<string>('123456');
   const [errorMessage, setErrorMessage] = React.useState<string>('');
   const [RememberMe, setRememberMe] = React.useState<boolean>(true);
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -31,23 +31,16 @@ const Login: React.FC = () => {
       return setErrorMessage('用户名或密码不能为空');
     }
     setLoading(true);
-    LoginApi({ account, password } as LoginApi$$Request)
-      .then(({ data }) => {
-        setStorageUserInfo(data?.data as LoginApi$$Response);
-        _PingServe();
-      })
-      .catch(({ data }) => {
-        setLoading(false);
-        if (data?.hasError) {
-          message.error(data?.errorDesc);
-        } else {
-          setErrorMessage('登录失败，请检查用户名或密码是否正确');
-        }
-        console.error('login_err:', data);
-      });
-  };
+    setStorageUserInfo({
+      token: '321324f56sf4s6df',
+      id: 1,
+      account: '10001',
+      name: '张三',
+      role_info: {},
+      /** 大队信息 */
+      group_info: {}
+    } as LoginApi$$Response);
 
-  const _PingServe = () => {
     setErrorMessage('');
     if (RememberMe) {
       localStorage.setItem('__account', account);
@@ -57,19 +50,11 @@ const Login: React.FC = () => {
       localStorage.removeItem('__password');
     }
 
-    PingApi({})
-      .then(() => {
-        message.success('登录成功', 0.5, () => {
-          setLoading(false);
-          push('/home');
-          Global.setUserInfo(getStorageUserInfo() as LoginApi$$Response);
-        });
-      })
-      .catch((error) => {
-        setLoading(false);
-        setErrorMessage('当前网络不可用, 请稍后重试!');
-        console.error('PingServe', error);
-      });
+    message.success('登录成功', 0.5, () => {
+      setLoading(false);
+      push('/home');
+      Global.setUserInfo(getStorageUserInfo() as LoginApi$$Response);
+    });
   };
 
   return useObserver(() => (
